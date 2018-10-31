@@ -1,5 +1,3 @@
----
-
 - hosts: all
   tasks:
           name: install epel-release.noarch
@@ -13,24 +11,26 @@
          
           name: update everything
           yum:
-                  name: '*'
+                  name: "*"
                   state: lastest
+                  notify: "Reboot"
 
-          name: Reboot        
-          reboot:
-                  reboot_timeout: 3600
-          vars:
-                  packages:
-                          - net-tools
-                          - ncdu
-                          - ntpdate
-                          - ntp
-                          - screen
-                          - bind-utils
-                          - mlocate
-                          - rsync
-                          - snmp-utils
-                          - telnet
-                          - traceroute
-                          - nfs-utils
-                          - wget
+  handlers:
+         name: Reboot        
+         reboot:
+                reboot_timeout: 3600
+  vars:
+        packages:
+                - net-tools
+                - ncdu
+                - ntpdate
+                - ntp
+                - screen
+                - bind-utils
+                - mlocate
+                - rsync
+                - snmp-utils
+                - telnet
+                - traceroute
+                - nfs-utils
+                - wget
