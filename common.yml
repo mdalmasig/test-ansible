@@ -1,0 +1,36 @@
+---
+
+- hosts: all
+  tasks:
+          name: install epel-release.noarch
+          yum_repository:
+                  name: epel-release.noarch
+          
+          name: Install a list of packages
+          yum:
+                  name: "{{packages}}"      
+                  state: present
+         
+          name: update everything
+          yum:
+                  name: '*'
+                  state: lastest
+
+          name: Reboot        
+          reboot:
+                  reboot_timeout: 3600
+          vars:
+                  packages:
+                          - net-tools
+                          - ncdu
+                          - ntpdate
+                          - ntp
+                          - screen
+                          - bind-utils
+                          - mlocate
+                          - rsync
+                          - snmp-utils
+                          - telnet
+                          - traceroute
+                          - nfs-utils
+                          - wget
