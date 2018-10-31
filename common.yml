@@ -1,3 +1,5 @@
+---
+
 - hosts: all
   tasks:
           name: install epel-release.noarch
@@ -14,7 +16,10 @@
                   name: "*"
                   state: lastest
                   notify: "Reboot"
-
+        
+         name: change selinux
+         selinux:
+                 state: permissive
   handlers:
          name: Reboot        
          reboot:
